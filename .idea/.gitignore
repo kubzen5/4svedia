@@ -1,0 +1,15 @@
+# PyCharm
+/.idea/
+
+# Virtual environment
+/.venv/
+
+# Ignore data contents
+/data/**/*
+/data_raw/**/*
+
+# Keep directories and .gitkeep files
+!/data/**/
+!/data/**/.gitkeep
+!/data_raw/**/
+!/data_raw/**/.gitkeep
