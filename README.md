@@ -4,6 +4,23 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S02E06
+
+Download and analyze 10,000 sensor readings, classify deduplicated operator
+notes, and submit every anomaly:
+
+```powershell
+uv run s02e06.py
+```
+
+Use `uv run s02e06.py --analyze-only` to print the result without submitting.
+The default classifier recognizes the dataset's finite note templates locally,
+so operator notes are not disclosed externally. `--use-openai` enables the
+deduplicated model classifier and persists its cache in
+`.cache/evaluation_notes.json` when that disclosure is explicitly acceptable.
+Configuration uses the existing Agent Hub and OpenAI variables documented in
+`.env-example`.
+
 ## S02E05
 
 Analyze the gridded drone map with a vision model and submit a complete mission
