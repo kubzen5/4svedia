@@ -1,5 +1,6 @@
 .env
 *.pyc
+*.log
 /.idea
 /data
 /data_raw
