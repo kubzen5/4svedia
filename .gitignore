@@ -1,1 +1,5 @@
 .env
+*.pyc
+/.idea
+/data
+/data_raw
