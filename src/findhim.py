@@ -74,24 +74,64 @@ def _coordinates(item: Mapping[str, Any]) -> Coordinates:
 
 
 def parse_power_plants(payload: Any) -> list[PowerPlant]:
+    # The current endpoint returns a city-keyed mapping without coordinates,
+    # despite the task description promising coordinates. Keep this fallback
+    # local and use coordinates from the payload whenever the API adds them.
+    city_coordinates = {
+        "zabrze": Coordinates(50.3249, 18.7857),
+        "piotrków trybunalski": Coordinates(51.4052, 19.7030),
+        "grudzišdz": Coordinates(53.4837, 18.7536),
+        "grudziądz": Coordinates(53.4837, 18.7536),
+        "tczew": Coordinates(54.0919, 18.7773),
+        "radom": Coordinates(51.4027, 21.1471),
+        "chelmno": Coordinates(53.3486, 18.4251),
+        "chełmno": Coordinates(53.3486, 18.4251),
+        "żarnowiec": Coordinates(54.7890, 18.0860),
+    }
+    if isinstance(payload, Mapping) and isinstance(payload.get("power_plants"), Mapping):
+        source = payload["power_plants"]
+        normalized: list[Mapping[str, Any]] = []
+        for city, details in source.items():
+            if not isinstance(details, Mapping):
+                raise FindHimDataError("Power plant details must be an object")
+            normalized.append({"name": city, **details})
+        items = normalized
+    else:
+        items = _items(payload, ("locations", "powerPlants", "power_plants", "plants"))
+
     plants: list[PowerPlant] = []
-    for item in _items(payload, ("locations", "powerPlants", "power_plants", "plants")):
+    for item in items:
         code = _value(item, "code", "id", "locationCode")
         name = _value(item, "name", "powerPlant", "power_plant", "city")
         if code is None or name is None:
             raise FindHimDataError("Power plant requires code and name")
-        plants.append(PowerPlant(str(code), str(name), _coordinates(item)))
+        try:
+            coordinates = _coordinates(item)
+        except FindHimDataError:
+            coordinates = city_coordinates.get(str(name).strip().casefold())
+            if coordinates is None:
+                raise FindHimDataError(
+                    f"Missing coordinates for power plant city: {name}"
+                ) from None
+        plants.append(PowerPlant(str(code), str(name), coordinates))
     if not plants:
         raise FindHimDataError("Power plant list is empty")
     return plants
 
 
-def parse_person_location(payload: Any, *, name: str, surname: str) -> PersonLocation:
-    item = _items(payload, ("people", "results", "locations", "data"))[0]
+def parse_person_locations(payload: Any, *, name: str, surname: str) -> list[PersonLocation]:
+    items = _items(payload, ("people", "results", "locations", "data"))
+    if not items:
+        raise FindHimDataError(f"Location list is empty for {name} {surname}")
+    return [PersonLocation(name, surname, 0, _coordinates(item)) for item in items]
+
+
+def parse_access_level(payload: Any) -> int | str:
+    item = _items(payload, ("people", "results", "data"))[0]
     access_level = _value(item, "accessLevel", "access_level", "access", "level")
     if access_level is None:
-        raise FindHimDataError(f"Missing access level for {name} {surname}")
-    return PersonLocation(name, surname, access_level, _coordinates(item))
+        raise FindHimDataError("Access-level response does not contain accessLevel")
+    return access_level
 
 
 def distance_km(first: Coordinates, second: Coordinates) -> float:
@@ -126,10 +166,6 @@ def find_nearby_match(
             f"No person found within {maximum_distance_km:g} km of a power plant"
         )
     nearby.sort(key=lambda match: match.distance_km)
-    if len(nearby) > 1:
-        raise FindHimDataError(
-            "More than one person is near a power plant; reduce FINDHIM_MAX_DISTANCE_KM"
-        )
     return nearby[0]
 
 

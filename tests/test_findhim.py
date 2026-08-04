@@ -7,7 +7,8 @@ from src.findhim import (
     build_answer,
     distance_km,
     find_nearby_match,
-    parse_person_location,
+    parse_access_level,
+    parse_person_locations,
     parse_power_plants,
 )
 
@@ -17,13 +18,21 @@ class FindHimTests(unittest.TestCase):
         plants = parse_power_plants(
             {"locations": [{"code": "ZAR", "name": "Zarnowiec", "lat": 54.7, "lon": 18.1}]}
         )
-        person = parse_person_location(
-            {"data": [{"access_level": 4, "coordinates": {"latitude": 54.7001, "longitude": 18.1}}]},
+        people = parse_person_locations(
+            {"data": [{"coordinates": {"latitude": 54.7001, "longitude": 18.1}}]},
             name="Jan",
             surname="Kowalski",
         )
         self.assertEqual(plants[0].code, "ZAR")
-        self.assertEqual(person.access_level, 4)
+        self.assertEqual(people[0].coordinates.latitude, 54.7001)
+        self.assertEqual(parse_access_level({"accessLevel": 4}), 4)
+
+    def test_parses_real_city_keyed_power_plant_shape(self) -> None:
+        plants = parse_power_plants(
+            {"power_plants": {"Chelmno": {"code": "PWR2758PL", "is_active": True}}}
+        )
+        self.assertEqual(plants[0].code, "PWR2758PL")
+        self.assertAlmostEqual(plants[0].coordinates.latitude, 53.3486)
 
     def test_finds_one_nearby_person_and_builds_answer(self) -> None:
         plant = PowerPlant("ZAR", "Zarnowiec", Coordinates(54.7, 18.1))
