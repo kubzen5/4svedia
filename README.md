@@ -4,6 +4,20 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S02E04
+
+Search the active mailbox and submit the three requested security facts:
+
+```powershell
+uv run s02e04.py
+```
+
+The runner discovers the zmail contract through `help`, searches for Wiktor,
+refreshes thread identifiers before downloading full messages, prioritizes
+explicit corrections, and retries searches while new mail may still arrive.
+It uses the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY` settings from
+`.env-example`.
+
 ## S02E03
 
 Download, condense, and iteratively submit power-plant failure logs:
