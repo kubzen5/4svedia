@@ -4,6 +4,19 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S01E05
+
+Activate railway route `X-01` using the API's self-documented workflow:
+
+```powershell
+uv run s01e05.py
+```
+
+The script starts with `help`, follows an explicit machine-readable workflow,
+retries simulated overload responses, respects rate-limit reset headers, and
+stops when it receives a `{FLG:...}` flag. It uses `AGENTHUB_API_URL` and
+`AGENTHUB_API_KEY` documented in `.env-example`.
+
 ## S01E04
 
 Build and submit the SPK transport declaration for the `sendit` task:
