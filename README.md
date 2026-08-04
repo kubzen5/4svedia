@@ -4,6 +4,19 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S02E03
+
+Download, condense, and iteratively submit power-plant failure logs:
+
+```powershell
+uv run s02e03.py
+```
+
+The runner prints source size statistics, keeps the multiline result below a
+conservative 1500-token estimate, and uses verifier feedback to prioritize
+missing components. It uses the existing `AGENTHUB_API_URL` and
+`AGENTHUB_API_KEY` settings documented in `.env-example`.
+
 ## S02E02
 
 Solve the 3x3 electricity puzzle from its compact JSON representation:
