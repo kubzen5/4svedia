@@ -4,6 +4,20 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S02E01
+
+Fetch and classify the current cargo list:
+
+```powershell
+$env:AGENTHUB_API_URL = "https://hub.ag3nts.org/"
+$env:AGENTHUB_API_KEY = "your_api_key_here"
+uv run s02e01.py
+```
+
+The script tries four compact classification prompts, always treats
+reactor-related cargo as neutral (`NEU`), and resets the task before each
+prompt variant. Credentials are loaded from `.env` when present.
+
 ## S01E05
 
 Activate railway route `X-01` using the API's self-documented workflow:
