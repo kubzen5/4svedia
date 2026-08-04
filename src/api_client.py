@@ -150,6 +150,7 @@ class ApiClient:
         query: Mapping[str, Any] | None = None,
         headers: Mapping[str, str] | None = None,
         body: bytes | None = None,
+        allow_http_error_response: bool = False,
     ) -> bytes:
         url = self._prepare_url(endpoint, query)
         request = Request(
@@ -163,8 +164,17 @@ class ApiClient:
             with urlopen(request, timeout=self.config.timeout_seconds) as response:
                 return response.read()
         except HTTPError as exc:
+            if allow_http_error_response:
+                return exc.read()
+            try:
+                detail = exc.read().decode("utf-8", errors="replace").strip()
+            except Exception:
+                detail = ""
+            if len(detail) > 300:
+                detail = detail[:300] + "..."
+            suffix = f": {detail}" if detail else ""
             raise ApiClientError(
-                f"API returned HTTP {exc.code} for {self._redact(url)}"
+                f"API returned HTTP {exc.code} for {self._redact(url)}{suffix}"
             ) from exc
         except URLError as exc:
             raise ApiClientError(
@@ -228,6 +238,7 @@ class ApiClient:
             *,
             query: Mapping[str, Any] | None = None,
             headers: Mapping[str, str] | None = None,
+            allow_http_error_response: bool = False,
     ) -> Any:
         """Wyślij POST z JSON-em i zwróć odpowiedź JSON."""
 
@@ -251,6 +262,7 @@ class ApiClient:
                 **(headers or {}),
             },
             body=body,
+            allow_http_error_response=allow_http_error_response,
         )
 
         if not response:
