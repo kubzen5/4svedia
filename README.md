@@ -4,6 +4,18 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S01E04
+
+Build and submit the SPK transport declaration for the `sendit` task:
+
+```powershell
+uv run s01e04.py
+```
+
+The script uses `AGENTHUB_API_URL` and `AGENTHUB_API_KEY` documented in
+`.env-example`, prints the exact declaration sent to the Hub, and then prints
+the JSON verification response.
+
 ## S01E03
 
 Start the session-aware logistics proxy:
