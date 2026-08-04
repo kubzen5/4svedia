@@ -4,6 +4,21 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S02E05
+
+Analyze the gridded drone map with a vision model and submit a complete mission
+to the fictional DRN-BMB7 simulator:
+
+```powershell
+uv run s02e05.py
+```
+
+The runner reports the detected one-based dam sector and the Hub response. It
+uses `AGENTHUB_API_URL`, `AGENTHUB_API_KEY`, `OPENAI_API_KEY`, and
+`OPENAI_MODEL`, all already documented in `.env-example`.
+Use `uv run s02e05.py --analyze-only` to verify map recognition without
+submitting mission instructions.
+
 ## S02E04
 
 Search the active mailbox and submit the three requested security facts:
