@@ -4,6 +4,18 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S02E02
+
+Solve the 3x3 electricity puzzle from its compact JSON representation:
+
+```powershell
+uv run s02e02.py
+```
+
+Use `uv run s02e02.py --reset` to restore the initial board first. The runner
+calculates clockwise sprite rotations, submits them one at a time, and prints
+the Hub response containing the flag.
+
 ## S02E01
 
 Fetch and classify the current cargo list:
