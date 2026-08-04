@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import secrets
 from typing import Any
 from urllib.error import URLError
 from urllib.parse import urljoin
@@ -75,9 +76,14 @@ def main() -> None:
         )
     )
     print(f"Submitting public endpoint: {endpoint}")
+    session_id = secrets.token_urlsafe(12)
     result = client.post_json(
         "verify",
-        {"apikey": client.api_key, "task": "proxy", "answer": endpoint},
+        {
+            "apikey": client.api_key,
+            "task": "proxy",
+            "answer": {"url": endpoint, "sessionID": session_id},
+        },
     )
     print(json.dumps(result, ensure_ascii=False, indent=2))
 

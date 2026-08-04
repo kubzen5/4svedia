@@ -56,7 +56,7 @@ machine, expose port 3000 through the tunnel configured by your course setup.
 
 Skrypt automatycznie odczytuje adres HTTPS z API agenta ngrok na porcie 4040,
 sprawdza publiczne `/health`, dodaje `/assistant` i wysyła URL jako zadanie
-`proxy` do Agent Hub. Odpowiedź weryfikatora, w tym ewentualna flaga, pojawi się
+`proxy` do Agent Hub wraz z losowym `sessionID`. Odpowiedź weryfikatora, w tym ewentualna flaga, pojawi się
 w terminalu. Opcjonalnie można wpisać pełny URL endpointu do
 `PROXY_PUBLIC_URL` w `.env`, aby pominąć automatyczne wykrywanie.
 

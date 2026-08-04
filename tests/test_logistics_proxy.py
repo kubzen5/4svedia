@@ -64,6 +64,14 @@ class LogisticsAssistantTests(unittest.TestCase):
         b_messages = llm.requests[1]["messages"]
         self.assertFalse(any(m.get("content") == "sekret A" for m in b_messages))
 
+    def test_answers_weather_small_talk_without_calling_llm(self):
+        llm = FakeCompletions([])
+        assistant = LogisticsAssistant(llm, "test-model", FakePackages())
+        reply = assistant.reply("A", "A jaka pogoda w Krakowie?")
+        self.assertIn("Krakowie", reply)
+        self.assertIn("bez deszczu", reply)
+        self.assertEqual(llm.requests, [])
+
     def test_redirect_destination_is_forced(self):
         llm = FakeCompletions([
             response(tool_calls=[tool_call("c1", "redirect_package", {
