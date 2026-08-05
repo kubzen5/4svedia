@@ -1,7 +1,0 @@
-$ngrok = Invoke-RestMethod http://127.0.0.1:4040/api/tunnels
-$publicUrl = ($ngrok.tunnels | Where-Object {
-    $_.public_url -like "https://*"
-} | Select-Object -First 1).public_url
-
-$publicUrl
-Invoke-RestMethod "$publicUrl/health"
