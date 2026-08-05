@@ -251,3 +251,16 @@ Invoke-RestMethod "$publicUrl/health" `
 ```
 
 Skrypt `s01e03_verify.py` dodaje ten nagłówek automatycznie.
+# S04E04 — filesystem
+
+Build the virtual trade filesystem from Natan's ZIP notes and submit it through
+the Agent Hub verifier:
+
+```powershell
+uv run s04e04.py
+```
+
+The runner uses the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`
+variables documented in `.env-example`. It calls `help`, resets the task
+filesystem, creates `/miasta`, `/osoby`, and `/towary` in one batch, then calls
+`done`.
