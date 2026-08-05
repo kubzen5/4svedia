@@ -4,6 +4,19 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S03E03
+
+Safely guide the cooling-module robot through the moving reactor blocks:
+
+```powershell
+uv run s03e03.py
+```
+
+The runner starts a fresh board, predicts every block's position after the next
+tick, and chooses one of `right`, `wait`, or `left` until the robot reaches the
+goal. It uses the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY` variables
+documented in `.env-example`.
+
 ## S02E06
 
 Download and analyze 10,000 sensor readings, classify deduplicated operator
