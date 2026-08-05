@@ -1,5 +1,18 @@
 # 4svedia
 
+## S04E02
+
+Queue the wind forecast, turbine, and plant reports in parallel, secure every
+storm hour, select the safest productive blade angle, sign the configurations,
+test the turbine, and submit the final verification within its service window:
+
+```powershell
+uv run s04e02.py
+```
+
+The runner uses `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`, already documented
+in `.env-example`.
+
 
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
