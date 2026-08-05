@@ -1,5 +1,18 @@
 # 4svedia
 
+## S05E01
+
+Capture radio-monitoring materials, decode textual attachments locally, extract
+the Zion city report, and submit it to Agent Hub:
+
+```powershell
+uv run s05e01.py
+```
+
+The runner uses `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`, already documented
+in `.env-example`. Large Base64 payloads are decoded and routed locally rather
+than sent to a language model.
+
 ## S04E05
 
 Create one exactly matched and correctly signed warehouse order for every city:
