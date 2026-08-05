@@ -1,5 +1,20 @@
 # 4svedia
 
+## S04E03
+
+Rescue the wounded survivor from one of Domatowo's tallest apartment blocks:
+
+```powershell
+uv run s04e03.py
+```
+
+The runner resets the simulation, deploys eight scouts using three road-bound
+transporters, dynamically assigns every three-storey block, and calls the
+helicopter immediately after a positive inspection. Read-only reconnaissance
+is available with `--reconnaissance help` or `--reconnaissance map`. It uses
+the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY` variables documented in
+`.env-example`.
+
 ## S04E02
 
 Queue the wind forecast, turbine, and plant reports in parallel, secure every
