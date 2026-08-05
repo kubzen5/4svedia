@@ -4,6 +4,19 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S04E01
+
+Update the OKO incident and task records for Skolwin, redirect the incident
+queue to human movement near Komarowo, and submit the final verification:
+
+```powershell
+uv run s04e01.py
+```
+
+The runner uses the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`
+variables documented in `.env-example`. All record changes are sent through
+the Agent Hub `/verify` endpoint; the operator panel is not modified directly.
+
 ## S03E04
 
 Download the product/city CSV data, expose one natural-language product search
