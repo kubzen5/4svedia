@@ -4,6 +4,24 @@
 My project is called like that because it's all about course.
 Solution will be in Python 3.12.
 
+## S03E04
+
+Download the product/city CSV data, expose one natural-language product search
+tool, register it for the asynchronous `negotiations` task, and poll for the
+result:
+
+```powershell
+ngrok http 3000
+uv run s03e04.py
+```
+
+The ngrok tunnel must remain active while the verifier's agent calls the tool.
+Use `uv run s03e04.py --serve-only` to test or host the API without submitting
+it. The endpoint is `POST /search` with `{"params": "one product description"}`.
+Configuration uses the Agent Hub and `NEGOTIATIONS_*` variables documented in
+`.env-example`; `NEGOTIATIONS_PUBLIC_URL` is optional because the runner can
+discover a local ngrok agent automatically.
+
 ## S03E03
 
 Safely guide the cooling-module robot through the moving reactor blocks:
