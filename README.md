@@ -1,5 +1,21 @@
 # 4svedia
 
+## S05E02
+
+Conduct the timed Polish audio conversation, identify the passable road, and
+request that its monitoring be disabled:
+
+```powershell
+uv run s05e02.py
+```
+
+The runner uses `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`, already documented
+in `.env-example`. Speech is synthesized as Polish MP3 with Edge TTS, while
+operator replies are transcribed locally with `faster-whisper`. The Whisper
+model is loaded before the timed session starts. The runner sends only
+Base64-encoded audio after starting the session and prints the final Agent Hub
+response.
+
 ## S05E01
 
 Capture radio-monitoring materials, decode textual attachments locally, extract
