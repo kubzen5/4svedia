@@ -1,5 +1,18 @@
 # 4svedia
 
+## S04E05
+
+Create one exactly matched and correctly signed warehouse order for every city:
+
+```powershell
+uv run s04e05.py
+```
+
+Use `uv run s04e05.py --inspect` for read-only inspection of the task API,
+city needs, database schemas, and current orders. The runner uses the existing
+`AGENTHUB_API_URL` and `AGENTHUB_API_KEY` variables documented in
+`.env-example`.
+
 ## S04E03
 
 Rescue the wounded survivor from one of Domatowo's tallest apartment blocks:
