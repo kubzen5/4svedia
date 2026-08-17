@@ -26,6 +26,16 @@ city needs, database schemas, and current orders. The runner uses the existing
 `AGENTHUB_API_URL` and `AGENTHUB_API_KEY` variables documented in
 `.env-example`.
 
+```powershell
+uv run s04e04.py
+```
+
+The runner uses the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`
+variables documented in `.env-example`. It calls `help`, resets the task
+filesystem, creates `/miasta`, `/osoby`, and `/towary` in one batch, then calls
+`done`.
+
+
 ## S04E03
 
 Rescue the wounded survivor from one of Domatowo's tallest apartment blocks:
@@ -285,11 +295,3 @@ The `s01e03_verify.py` script adds this header automatically.
 Build the virtual trade filesystem from Natan's ZIP notes and submit it through
 the Agent Hub verifier:
 
-```powershell
-uv run s04e04.py
-```
-
-The runner uses the existing `AGENTHUB_API_URL` and `AGENTHUB_API_KEY`
-variables documented in `.env-example`. It calls `help`, resets the task
-filesystem, creates `/miasta`, `/osoby`, and `/towary` in one batch, then calls
-`done`.
